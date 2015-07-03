@@ -6,7 +6,7 @@ Restricted SSH server which allows SCP / SFTP access only.
 
 Put your authorized keys in an ENV variable and run the image:
 
-    AUTHORIZED_KEYS=$(cat -e my-authorized-keys)
+    AUTHORIZED_KEYS=$(base64 -w0 my-authorized-keys)
 
     docker run -d -e AUTHORIZED_KEYS=$AUTHORIZED_KEYS -p <PORT>:22 -v <DATADIR>:/home/data schoolscout/scp-server
 
