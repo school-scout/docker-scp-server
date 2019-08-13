@@ -2,6 +2,8 @@
 set -euo pipefail
 
 SECRETS_FILE=/run/secrets/authorized_keys
+DATA_USER=data
+DATA_DIR=/home/data
 
 # This won't be executed if keys already exist (i.e. from a volume)
 ssh-keygen -A
@@ -17,7 +19,10 @@ else
 fi
 
 # Chown data folder (if mounted as a volume for the first time)
-chown data:data /home/data
+if [[ "$(stat -c %U:%G "$DATA_DIR")" != "$DATA_USER:$DATA_USER" ]]; then
+  >&2 echo Changing owner of "$DATA_DIR" to "$DATA_USER:$DATA_USER"
+  chown "$DATA_USER":"$DATA_USER" "$DATA_DIR"
+fi
 
 # Run sshd on container start
 exec /usr/sbin/sshd -D -e
