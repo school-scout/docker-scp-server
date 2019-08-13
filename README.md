@@ -13,6 +13,7 @@ Restricted SSH server which allows SCP / SFTP access only.
       -e AUTHORIZED_KEYS=$AUTHORIZED_KEYS \
       -p <PORT>:22 \
       -v <DATADIR>:/home/data \
+      -v <HOSTKEYDIR>:/var/local/etc/ssh \
       schoolscout/scp-server
     ```
 
@@ -23,6 +24,7 @@ Restricted SSH server which allows SCP / SFTP access only.
       -v /path/to/my/authorized_keys:/run/secrets/authorized_keys \
       -p <PORT>:22 \
       -v <DATADIR>:/home/data \
+      -v <HOSTKEYDIR>:/var/local/etc/ssh \
       schoolscout/scp-server
     ```
 

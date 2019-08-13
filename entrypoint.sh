@@ -4,9 +4,12 @@ set -euo pipefail
 SECRETS_FILE=/run/secrets/authorized_keys
 DATA_USER=data
 DATA_DIR=/home/data
+HOST_KEYS_DIR_PREFIX=/var/local
+HOST_KEYS_DIR="$HOST_KEYS_DIR_PREFIX/etc/ssh"
 
 # This won't be executed if keys already exist (i.e. from a volume)
-ssh-keygen -A
+mkdir -p "$HOST_KEYS_DIR"
+ssh-keygen -A -f "$HOST_KEYS_DIR_PREFIX"
 
 if [[ -n "${AUTHORIZED_KEYS:-}" ]]; then
   # Copy authorized keys from ENV variable

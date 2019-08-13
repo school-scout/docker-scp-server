@@ -16,3 +16,4 @@ COPY entrypoint.sh /
 CMD ["/entrypoint.sh"]
 EXPOSE 22
 VOLUME /home/data
+VOLUME /var/local/etc/ssh

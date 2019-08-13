@@ -6,4 +6,8 @@ Subsystem       sftp    /usr/lib/ssh/sftp-server
 
 PasswordAuthentication no
 
+HostKey /var/local/etc/ssh/ssh_host_rsa_key
+HostKey /var/local/etc/ssh/ssh_host_ecdsa_key
+HostKey /var/local/etc/ssh/ssh_host_ed25519_key
+
 AuthorizedKeysFile /authorized_keys
