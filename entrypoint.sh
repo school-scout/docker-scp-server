@@ -21,10 +21,14 @@ else
   exit 1
 fi
 
-# Chown data folder (if mounted as a volume for the first time)
-if [[ "$(stat -c %U:%G "$DATA_DIR")" != "$DATA_USER:$DATA_USER" ]]; then
-  >&2 echo Changing owner of "$DATA_DIR" to "$DATA_USER:$DATA_USER"
-  chown "$DATA_USER":"$DATA_USER" "$DATA_DIR"
+writeable="1"
+grep "$DATA_DIR" /proc/mounts | grep " rw" || writeable=""
+if [[ -n "$writeable" ]]; then
+  # Chown data folder (if mounted as a volume for the first time)
+  if [[ "$(stat -c %U:%G "$DATA_DIR")" != "$DATA_USER:$DATA_USER" ]]; then
+    >&2 echo Changing owner of "$DATA_DIR" to "$DATA_USER:$DATA_USER"
+    chown "$DATA_USER":"$DATA_USER" "$DATA_DIR"
+  fi
 fi
 
 # Run sshd on container start
