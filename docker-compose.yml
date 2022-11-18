@@ -3,7 +3,7 @@ version: "3.7"
 services:
   app:
     build: .
-    image: schoolscout/scp-server
+    image: schoolscout/scp-server:0.1.0
     ports:
       - 2022:22/tcp
     volumes:
