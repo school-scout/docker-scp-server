@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    image: schoolscout/scp-server
+    ports:
+      - 2022:22/tcp
+    volumes:
+      - ./data:/home/data
+      - ./my-authorized-keys:/run/secrets/authorized_keys:ro
